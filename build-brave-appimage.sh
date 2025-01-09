@@ -10,8 +10,7 @@ BASICSTUFF="binutils gzip curl"
 COMPILERS="base-devel"
 
 # Grab the latest brave version
-BRAVE_VERSION=$(curl -s https://api.github.com/repos/brave/brave-browser/releases/latest | grep -Po '"tag_name": "\K.*?(?=")')
-echo $BRAVE_VERSION
+BRAVE_VERSION=$(curl -s https://api.github.com/repos/brave/brave-browser/releases/latest | grep -Po '"tag_name": "\K.*?(?=")' | sed 's/^v//')
 
 # CREATE AND ENTER THE APPDIR
 mkdir -p "$APP.AppDir"
