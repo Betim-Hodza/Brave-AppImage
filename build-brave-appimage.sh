@@ -40,7 +40,7 @@ EOF
 chmod +x AppRun
 
 # Create a desktop entry
-cat >> brave-browser.desktop << EOF
+cat >> brave.desktop << EOF
 [Desktop Entry]
 Name=Brave
 Exec=brave %U
