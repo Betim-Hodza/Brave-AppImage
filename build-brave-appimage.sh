@@ -5,8 +5,8 @@ APP=brave
 BIN="brave"
 DEPENDENCIES="alsa-lib cups-libs libxkbcommon libxshmfence mesa nss at-spi2-core \
 gtk3 dbus-glib libdrm libxcomposite libxdamage libxrandr libxscrnsaver \
-libxtst pango cairo gdk-pixbuf2 libasyncns libpulse libsndfile flac ldd "
-BASICSTUFF="binutils gzip curl appstreamcli"
+libxtst pango cairo gdk-pixbuf2 libasyncns libpulse libsndfile flac "
+BASICSTUFF="binutils gzip curl appstreamcli lld"
 COMPILERS="base-devel"
 
 # Grab the latest brave version
@@ -49,6 +49,22 @@ Icon=brave
 Categories=Network;WebBrowser;
 EOF
 
+# Create appdata.xml file
+mkdir -p usr/share/metainfo
+cat > usr/share/metainfo/brave.appdata.xml << EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>brave.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <name>Brave</name>
+  <summary>Secure, Fast & Private Web Browser</summary>
+  <description>
+    <p>Brave is a fast, secure, and privacy-focused web browser.</p>
+  </description>
+  <launchable type="desktop-id">brave.desktop</launchable>
+  <url type="homepage">https://brave.com/</url>
+</component>
+EOF
 
 # Download icon
 wget https://cdn.icon-icons.com/icons2/2622/PNG/512/browser_brave_icon_157736.png
@@ -98,5 +114,5 @@ copy_brave_binary
 cd ..
 wget -q https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage -O appimagetool
 chmod +x appimagetool
-ARCH=x86_64 ./appimagetool --comp xz "$APP.AppDir" "Brave-${BRAVE_VERSION}-x86_64.AppImage"
-EOF
+ARCH=x86_64 ./appimagetool --comp zstd "$APP.AppDir" "Brave-${BRAVE_VERSION}-x86_64.AppImage"
+
