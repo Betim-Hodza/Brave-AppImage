@@ -5,7 +5,7 @@ APP=brave
 BIN="brave"
 DEPENDENCIES="alsa-lib cups-libs libxkbcommon libxshmfence mesa nss at-spi2-core \
 gtk3 dbus-glib libdrm libxcomposite libxdamage libxrandr libxscrnsaver \
-libxtst pango cairo gdk-pixbuf2 libasyncns libpulse libsndfile flac lld appstreamcli"
+libxtst pango cairo gdk-pixbuf2 libasyncns libpulse libsndfile flac ldd appstreamcli"
 BASICSTUFF="binutils gzip curl"
 COMPILERS="base-devel"
 
@@ -52,8 +52,8 @@ EOF
 
 
 # Download icon
-wget https://brave.com/static-assets/images/optimized/brave-branding-assets/images/brave-logo-color-RGB_reversed.web 
-mv brave-logo-color-RGB_reversed.web brave.png
+wget https://cdn.icon-icons.com/icons2/2622/PNG/512/browser_brave_icon_157736.png
+mv browser_brave_icon_157736.png brave.png
 
 # Function to handle dependencies
 handle_dependencies()
@@ -85,7 +85,7 @@ copy_brave_binary()
   cp brave usr/bin/
 
   # copy direct dependencies
-  lld usr/bin/brave | grep "=>" | awk '{print $3}' | while read -r lib; do
+  ldd usr/bin/brave | grep "=>" | awk '{print $3}' | while read -r lib; do
     if [ -f "$lib" ]; then
       mkdir -p "usr/lib/$(dirname "$lib" | sed 's/\/usr\/lib\///')"
       cp -L "$lib" "usr/lib/$(dirname "$lib" | sed 's/\/usr\/lib\///')"
