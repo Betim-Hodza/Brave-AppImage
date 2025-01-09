@@ -5,8 +5,8 @@ APP=brave
 BIN="brave"
 DEPENDENCIES="alsa-lib cups-libs libxkbcommon libxshmfence mesa nss at-spi2-core \
 gtk3 dbus-glib libdrm libxcomposite libxdamage libxrandr libxscrnsaver \
-libxtst pango cairo gdk-pixbuf2 libasyncns libpulse libsndfile flac ldd appstreamcli"
-BASICSTUFF="binutils gzip curl"
+libxtst pango cairo gdk-pixbuf2 libasyncns libpulse libsndfile flac ldd "
+BASICSTUFF="binutils gzip curl appstreamcli"
 COMPILERS="base-devel"
 
 # Grab the latest brave version
