@@ -1,0 +1,12 @@
+#!/bin/sh
+HERE="$(dirname "$(readlink -f "${0}")")"
+export PATH="${HERE}/usr/bin:${PATH}"
+export LD_LIBRARY_PATH="${HERE}/usr/lib:${LD_LIBRARY_PATH}"
+export XDG_DATA_DIRS="${HERE}/usr/share:${XDG_DATA_DIRS}"
+export BRAVE_USER_DATA_DIR="${HOME}/.config/brave-appimage"
+
+# Hardware acceleration support
+export LIBGL_DRIVERS_PATH="${HERE}/usr/lib/dri"
+export LIBVA_DRIVERS_PATH="${HERE}/usr/lib/dri"
+
+exec "${HERE}/brave" "$@"

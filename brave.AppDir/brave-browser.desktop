@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Brave
+Exec=brave %U
+Terminal=false
+Icon=brave-browser
+Categories=Network;WebBrowser;
+MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;
