@@ -5,7 +5,7 @@ APP=brave
 BIN="brave"
 DEPENDENCIES="alsa-lib cups-libs libxkbcommon libxshmfence mesa nss at-spi2-core \
 gtk3 dbus-glib libdrm libxcomposite libxdamage libxrandr libxscrnsaver \
-libxtst pango cairo gdk-pixbuf2 libasyncns libpulse libsndfile flac"
+libxtst pango cairo gdk-pixbuf2 libasyncns libpulse libsndfile flac lld appstreamcli"
 BASICSTUFF="binutils gzip curl"
 COMPILERS="base-devel"
 
