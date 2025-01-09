@@ -16,9 +16,9 @@ echo $BRAVE_VERSION
 # CREATE AND ENTER THE APPDIR
 mkdir -p "$APP.AppDir"
 cd "$APP.AppDir" || exit 1
-
+# example of working link https://github.com/brave/brave-browser/releases/download/v1.74.46/brave-browser-1.74.46-linux-amd64.zip
 # Download and extract brave
-wget "https://github.com/brave/brave-browser/releases/download/${BRAVE_VERSION}/brave-browser-${BRAVE_VERSION}-linux-amd64.zip"
+wget "https://github.com/brave/brave-browser/releases/download/v${BRAVE_VERSION}/brave-browser-${BRAVE_VERSION}-linux-amd64.zip"
 unzip "brave-browser-${BRAVE_VERSION}-linux-amd64.zip"
 rm "brave-browser-${BRAVE_VERSION}-linux-amd64.zip"
 
