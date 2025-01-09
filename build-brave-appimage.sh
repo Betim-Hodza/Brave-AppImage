@@ -7,6 +7,7 @@ DEPENDENCIES="alsa-lib cups-libs libxkbcommon libxshmfence mesa nss at-spi2-core
 gtk3 dbus-glib libdrm libxcomposite libxdamage libxrandr libxscrnsaver \
 libxtst pango cairo gdk-pixbuf2 libasyncns libpulse libsndfile flac"
 BASICSTUFF="binutils gzip curl"
+COMPILERS="base-devel"
 
 # Grab the latest brave version
 BRAVE_VERSION=$(curl -s https://api.github.com/repos/brave/brave-browser/releases/latest | grep -Po '"tag_name": "\K.*?(?=")')

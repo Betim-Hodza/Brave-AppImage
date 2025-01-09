@@ -4,3 +4,9 @@ Exec=brave %U
 Terminal=false
 Icon=brave-browser
 Categories=Network;WebBrowser;
+[Desktop Entry]
+Name=Brave
+Exec=brave %U
+Terminal=false
+Icon=brave-browser
+Categories=Network;WebBrowser;
