@@ -6,10 +6,11 @@ BIN="brave"
 DEPENDENCIES="alsa-lib cups-libs libxkbcommon libxshmfence mesa nss at-spi2-core \
 gtk3 dbus-glib libdrm libxcomposite libxdamage libxrandr libxscrnsaver \
 libxtst pango cairo gdk-pixbuf2 libasyncns libpulse libsndfile flac"
-BASICSTUFF="binutils gzip"
+BASICSTUFF="binutils gzip curl"
 
 # Grab the latest brave version
-BRAVE_VERSION=$(curl -s "https://api.github.com/repos/brave/brave-browser/releases/latest" | grep -oP "(?<=\"tag_name\":\"v)[^\"]*")
+BRAVE_VERSION=$(curl -s https://api.github.com/repos/brave/brave-browser/releases/latest | grep -Po '"tag_name": "\K.*?(?=")')
+echo $BRAVE_VERSION
 
 # CREATE AND ENTER THE APPDIR
 mkdir -p "$APP.AppDir"
@@ -38,19 +39,18 @@ EOF
 chmod +x AppRun
 
 # Create a desktop entry
-cat > brave-browser.desktop << EOF
+cat >> brave-browser.desktop << EOF
 [Desktop Entry]
 Name=Brave
 Exec=brave %U
 Terminal=false
 Icon=brave-browser
 Categories=Network;WebBrowser;
-MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;
 EOF
 
 
 # Download icon
-wget https://brave-browser.readthedocs.io/en/latest/_static/brave-release.png -O brave-browser.png
+wget https://brave.com/static-assets/images/brave-logo-sans-text.svg brave-browser.png
 
 # Function to handle dependencies
 handle_dependencies()
