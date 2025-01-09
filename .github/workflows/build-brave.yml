@@ -1,0 +1,33 @@
+name: Build and Deploy AppImage
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: ubuntu:20.04
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        run: |
+          apt-get update
+          apt-get install -y wget file squashfs-tools zsync
+
+      - name: Build AppImage
+        run: |
+          chmod +x build-brave-appimage.sh
+          ./build-brave-appimage.sh
+          
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            *.AppImage
+            *.AppImage.zsync
