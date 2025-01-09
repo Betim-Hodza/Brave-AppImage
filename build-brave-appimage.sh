@@ -52,7 +52,8 @@ EOF
 
 
 # Download icon
-wget https://brave.com/static-assets/images/brave-logo-sans-text.svg brave-browser.png
+wget https://brave.com/static-assets/images/optimized/brave-branding-assets/images/brave-logo-color-RGB_reversed.web 
+mv brave-logo-color-RGB_reversed.web brave.png
 
 # Function to handle dependencies
 handle_dependencies()
