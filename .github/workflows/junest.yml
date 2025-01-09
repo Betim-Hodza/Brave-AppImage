@@ -18,15 +18,15 @@ jobs:
       if: always()
       run: |
         sudo apt update && sudo apt install desktop-file-utils
-        chmod a+x ./virtualbox-kvm-junest.sh
-        ./virtualbox-kvm-junest.sh
+        chmod a+x ./build-brave-appimage.sh
+        ./build-brave-appimage.sh
         mkdir dist
         mv *AppImage* dist/
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4.4.0
       with:
-        name: VirtualBox-x86_64.AppImage
+        name: Brave-x86_64.AppImage
         path: 'dist'
         
   release:
@@ -37,7 +37,7 @@ jobs:
       steps:
         - uses: actions/download-artifact@v4.1.8
           with:
-            name: VirtualBox-x86_64.AppImage
+            name: Brave-x86_64.AppImage
 
         - name: release
           uses: marvinpinto/action-automatic-releases@latest
