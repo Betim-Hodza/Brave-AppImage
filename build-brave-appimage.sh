@@ -5,8 +5,8 @@ APP=brave
 BIN="brave"
 DEPENDENCIES="alsa-lib cups-libs libxkbcommon libxshmfence mesa nss at-spi2-core \
 gtk3 dbus-glib libdrm libxcomposite libxdamage libxrandr libxscrnsaver \
-libxtst pango cairo gdk-pixbuf2 libasyncns libpulse libsndfile flac "
-BASICSTUFF="binutils gzip curl appstreamcli lld"
+libxtst pango cairo gdk-pixbuf2 libasyncns libpulse libsndfile flac"
+BASICSTUFF="binutils gzip curl lld"  # Removed appstreamcli as it's not needed if we're manually creating metadata
 COMPILERS="base-devel"
 
 # Grab the latest brave version
@@ -15,7 +15,7 @@ BRAVE_VERSION=$(curl -s https://api.github.com/repos/brave/brave-browser/release
 # CREATE AND ENTER THE APPDIR
 mkdir -p "$APP.AppDir"
 cd "$APP.AppDir" || exit 1
-# example of working link https://github.com/brave/brave-browser/releases/download/v1.74.46/brave-browser-1.74.46-linux-amd64.zip
+
 # Download and extract brave
 wget "https://github.com/brave/brave-browser/releases/download/v${BRAVE_VERSION}/brave-browser-${BRAVE_VERSION}-linux-amd64.zip"
 unzip "brave-browser-${BRAVE_VERSION}-linux-amd64.zip"
@@ -39,7 +39,7 @@ EOF
 chmod +x AppRun
 
 # Create a desktop entry
-cat >> "$APP".desktop << EOF
+cat > "$APP".desktop << EOF
 [Desktop Entry]
 Type=Application
 Name=$(echo "$APP" | tr a-z A-Z)
@@ -67,8 +67,7 @@ cat > usr/share/metainfo/brave.appdata.xml << EOF
 EOF
 
 # Download icon
-wget https://cdn.icon-icons.com/icons2/2622/PNG/512/browser_brave_icon_157736.png
-mv browser_brave_icon_157736.png brave.png
+wget -q https://cdn.icon-icons.com/icons2/2622/PNG/512/browser_brave_icon_157736.png -O brave.png
 
 # Function to handle dependencies
 handle_dependencies()
@@ -80,7 +79,7 @@ handle_dependencies()
     find /usr/lib -name "lib$dep*.so*" -exec cp -P {} usr/lib/ \;
   done
 
-  # copy requried binaries
+  # copy required binaries
   for tool in $BASICSTUFF; do
     cp "$(which $tool)" usr/bin 2>/dev/null
   done
@@ -93,7 +92,6 @@ handle_dependencies()
 handle_dependencies
 
 # function to copy brave binary and its direct dependencies
-
 copy_brave_binary()
 {
   mkdir -p usr/bin
@@ -115,4 +113,3 @@ cd ..
 wget -q https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage -O appimagetool
 chmod +x appimagetool
 ARCH=x86_64 ./appimagetool --comp zstd "$APP.AppDir" "Brave-${BRAVE_VERSION}-x86_64.AppImage"
-
