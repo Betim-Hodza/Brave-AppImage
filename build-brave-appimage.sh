@@ -40,12 +40,13 @@ EOF
 chmod +x AppRun
 
 # Create a desktop entry
-cat >> brave.desktop << EOF
+cat >> "$APP".desktop << EOF
 [Desktop Entry]
-Name=Brave
-Exec=brave %U
+Type=Application
+Name=$(echo "$APP" | tr a-z A-Z)
+Exec=$BIN
 Terminal=false
-Icon=brave-browser
+Icon=brave
 Categories=Network;WebBrowser;
 EOF
 
